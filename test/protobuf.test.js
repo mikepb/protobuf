@@ -12,11 +12,27 @@ assert.bufferEqual = function(a, b, c) {
                 c);
 };
 
-var T = new Schema(read('test/unittest.desc'))['protobuf_unittest.TestAllTypes'];
-assert.ok(T, 'type in schema');
-var golden = read('test/golden_message');
-var message = T.parse(golden);
-assert.ok(message, 'parses message');  // currently rather crashes
+describe('protobuf', function () {
+
+  before(function () {
+    this.source = read(__dirname + '/unittest.desc');
+    this.golden = read(__dirname + '/golden_message');
+  });
+
+  it('should load schema', function () {
+    this.schema = new Schema(this.source);
+    this.descriptor = this.schema['protobuf_unittest.TestAllTypes'];
+    assert(this.descriptor);
+  });
+
+  it('should parse message', function () {
+    this.message = this.descriptor.parse(this.golden);
+    assert(this.message);  // currently rather crashes
+  });
+
+});
+
+/*
 
 assert.bufferEqual(T.serialize(message), golden, 'roundtrip');
 
@@ -106,3 +122,4 @@ assert.equal(T.parse(
 ).optionalString, 'f\u0000o');
 
 puts('Success');
+*/

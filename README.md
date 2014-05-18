@@ -70,67 +70,7 @@ Makefile: (second line begins with a TAB not spaces)
 
 output:
 
-    $ node buftest.js 
+    $ node buftest.js
     proto.length: 18
     unserialised: {"num":42,"payload":{"0":72,"1":101,"2":108,"3":108,"4":111,"5":32,"6":87,"7":111,"8":114,"9":108,"10":100,"length":11}}
     payload: <Buffer 48 65 6c 6c 6f 20 57 6f 72 6c 64>
-
-
-
-
-
-
-
-
-
-Older instructions for use with the NodeJS 0.6.x series.
-========================================================
-
-Prerequisites:
---------------
-
-NodeJS v0.6.X
-npm
-
-
-To install on Ubuntu and OSX:
--------------------------------
-
-The first steps are to build and install Google's protobuf library. Make sure you have the right version by running "protoc --version" after the install.
-
-    wget http://protobuf.googlecode.com/files/protobuf-2.4.1.tar.gz
-    tar -xzvf protobuf-2.4.1.tar.gz
-    cd protobuf-2.4.1/
-    ./configure && make && sudo make install
-    cd
-
-This installs the npm package.
-
-    npm install protobuf
-
-For Ubuntu, update library paths.
-
-    sudo ldconfig
-
-For OSX, you might need to add the path:
-
-    export DYLD_LIBRARY_PATH=/home/chris/node_modules/protobuf/build/Release:/usr/local/lib:$DYLD_LIBRARY_PATH
-
-And test that it works...  Run node, try 
-
-    require('protobuf');
-
-you should see: 
-
-    { Schema: [Function: Schema] }
-
-
-As seen from the instructions above, this is my first attempt at packaging a slightly complex C++ module for NPM.
-
-If you can help me simplify these instructions, please submit a patch.
-
-
-Good luck,
-
-Chris.
-
